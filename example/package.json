@@ -1,0 +1,17 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "Run the example, with `wzrd`:",
+  "main": "example.js",
+  "scripts": {
+    "start": "wzrd example.js -- -t ../"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^14.0.0",
+    "insert-css": "^2.0.0",
+    "wzrd": "^1.5.0"
+  }
+}
