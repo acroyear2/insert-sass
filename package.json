@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "css-loader": "^0.23.1",
-    "node-sass": "^3.8.0",
+    "node-sass": "^4.5.0",
     "through2": "^2.0.1"
   },
   "devDependencies": {},
