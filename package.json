@@ -4,9 +4,9 @@
   "description": "sass compilation / css insertion transform",
   "main": "index.js",
   "dependencies": {
-    "css-loader": "^0.23.1",
-    "node-sass": "^4.5.0",
-    "through2": "^2.0.1"
+    "css-loader": "^0.28.0",
+    "node-sass": "^4.5.2",
+    "through2": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {
