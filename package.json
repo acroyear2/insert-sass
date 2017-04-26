@@ -1,6 +1,6 @@
 {
   "name": "@xx55/insert-sass",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "sass compilation / css insertion transform",
   "main": "index.js",
   "dependencies": {
