@@ -36,6 +36,11 @@ module.exports = function(file, opts) {
                 result = result.replace(/exports = module\.exports.*/g, 'function d(x) { return require("insert-css")(x[1]) }')
                 result = result.replace(/exports\.push/g, 'd')
 
+                // exports.i is added when 'composes' is used
+                result = result.replace(/exports\.i\(require.*/g, "")
+                // again, composes related
+                result = result.replace(/require\(\"(.+)\"\)\.locals\[\"(.+)\"\](.*)/g, "require(\"$1\")[\"$2\"]$3")
+
                 if (/exports\.locals \=/g.test(result)) {
                     result = result.replace(/exports\.locals \=/g, 'return')
                 } else {
