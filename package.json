@@ -6,9 +6,9 @@
   "dependencies": {
     "css-loader": "^0.28.0",
     "node-sass": "^4.5.2",
-    "through2": "^2.0.3"
+    "through2": "^2.0.3",
+    "insert-css": "^2.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }

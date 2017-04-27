@@ -3,6 +3,8 @@ var through = require('through2')
 var sass = require('node-sass')
 var css = require('css-loader')
 
+var packageName = require('./package.json').name
+
 module.exports = function(file, opts) {
   if ('.scss' !== path.extname(file)) {
 	  return through()
@@ -33,7 +35,7 @@ module.exports = function(file, opts) {
             if (err) {
 				console.error(err)
 			} else {
-                result = result.replace(/exports = module\.exports.*/g, 'function d(x) { return require("insert-css")(x[1]) }')
+                result = result.replace(/exports = module\.exports.*/g, 'function d(x) { return require("' + packageName + '/css")(x[1]) }')
                 result = result.replace(/exports\.push/g, 'd')
 
                 // exports.i is added when 'composes' is used
