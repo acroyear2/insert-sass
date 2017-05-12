@@ -44,25 +44,3 @@ test("example", t => {
         }
     })
 })
-
-// test("insert-sass", t => {
-//     const b = browserify(__dirname + "/inject.js")
-//     b.transform(require("../"))
-//     b.bundle((er, src) => {
-//         t.error(er)
-
-//         console.log(src.toString())
-
-//         jsdom.env("<head />", (err, window) => {
-//             vm.runInNewContext(src, {
-//                 console: { log: log },
-//                 document: window.document
-//             })
-//         })
-
-//         function log(msg) {
-//             console.log(msg)
-//             t.end()
-//         }
-//     })
-// })
