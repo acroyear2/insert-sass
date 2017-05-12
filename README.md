@@ -38,7 +38,7 @@ body {
 
 [`example.js`](./test/example.js)
 
-```
+```js
 const foo = require("./first.scss")() // calling the function inserts css into <head>
 
 const el = document.createElement("p")
@@ -53,8 +53,7 @@ console.log(document.querySelector("head > style").innerHTML) // css is inserted
 
 const otherStyles = require("./second.scss") // not applied yet
 
-console.log(otherStyles)
-// { [Function: bound ] bar: 'test-second_bar_1geYD' }
+console.log(otherStyles) // { [Function: bound ] bar: 'test-second_bar_1geYD' }
 
 console.log(document.querySelector("head > style").innerHTML) // second.scss is not inserted yet
 
