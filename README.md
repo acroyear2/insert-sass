@@ -8,7 +8,7 @@ npm install insert-sass
 
 # example
 
-[`foo.scss`](./test/foo.scss)
+[`first.scss`](./test/foo.scss)
 
 ```scss
 body {
@@ -22,7 +22,7 @@ body {
 }
 ```
 
-[`bar.scss`](./test/bar.scss)
+[`second.scss`](./test/bar.scss)
 
 ```scss
 body {
