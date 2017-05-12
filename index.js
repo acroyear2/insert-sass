@@ -1,18 +1,19 @@
-var path = require('path')
-var through = require('through2')
-var sass = require('node-sass')
-var css = require('css-loader')
-
-var packageName = require('./package.json').name
+var path = require("path")
+var through = require("through2")
+var sass = require("node-sass")
+var css = require("css-loader")
 
 module.exports = function(file, opts) {
-  if ('.scss' !== path.extname(file)) {
+  if (".scss" !== path.extname(file)) {
 	  return through()
   }
 
-  if (!opts) opts = {}
+  if (!opts) {
+      opts = {}
+  }
 
-  var s = '';
+  var s = "";
+
   return through(function(row, enc, cb) {
     s += row.toString()
     cb()
@@ -20,7 +21,7 @@ module.exports = function(file, opts) {
     var self = this
 
 	if (opts.normalizeImports) {
-		s = s.replace(/@import ([\"\'])(\.{1,2}\/)*/g, '@import $1')
+		s = s.replace(/@import ([\"\'])(\.{1,2}\/)*/g, "@import $1")
 	}
 
     opts.data = s
@@ -35,26 +36,27 @@ module.exports = function(file, opts) {
             if (err) {
 				console.error(err)
 			} else {
-                result = result.replace(/exports = module\.exports.*/g, 'function d(x) { return require("' + packageName + '/css")(x[1]) }')
-                result = result.replace(/exports\.push/g, 'd')
+                result = result.replace(/exports = module\.exports.*/g, 'var e = {}, f; function d(x) { f = require("' + __dirname + '/ext").css.bind(null, x[1], e) }')
+                result = result.replace(/exports\.push/g, "d")
 
-                // exports.i is added when 'composes' is used
+                // composes
                 result = result.replace(/exports\.i\(require.*/g, "")
-                // again, composes related
                 result = result.replace(/require\(\"(.+)\"\)\.locals\[\"(.+)\"\](.*)/g, "require(\"$1\")[\"$2\"]$3")
 
                 if (/exports\.locals \=/g.test(result)) {
-                    result = result.replace(/exports\.locals \=/g, 'return')
-                } else {
-                    var xid = path.basename(file).split('.')[0];
-                    result += 'return { "' + xid + '": "' + xid + '"};'
+                    result = result.replace(/exports\.locals \=/g, "e.s =")
+                } else { // composes
+                    var xid = path.basename(file).split(".")[0];
+                    result += 'e.s = { "' + xid + '": "' + xid + '"};'
                 }
 
-                result = 'module.exports=(function(){\n' + result + '\n})()'
+                result += '\n\nreturn require("' + __dirname + '/ext").x.bind(null, e.s, f)();\n'
+
+                result = "module.exports=(function(){\n" + result + "\n})()"
 
                 self.push(result)
             }
-            s = ''; cb()
+            s = ""; cb()
         }
 
         var ctx = {
@@ -62,19 +64,20 @@ module.exports = function(file, opts) {
                 return next
             },
             callback: next,
-            options: { context: '' },
+            options: { context: "" },
             resource: file,
             resourcePath: file,
-            loaders: [ { request: '/path/css-loader' } ],
+            loaders: [ { request: "/path/css-loader" } ],
             emitError: function(message) {
                 throw new Error(message);
             }
         }
 
-		ctx.query = '?module&localIdentName=[path][name]---[local]---[hash:base64:5]'
+		ctx.query = "?module&localIdentName=[path][name]_[local]_[hash:base64:5]"
 
-        if (opts.query)
+        if (opts.query) {
             ctx.query = opts.query
+        }
 
         css.call(ctx, res.css.toString())
       }
