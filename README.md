@@ -25,14 +25,8 @@ body {
 [`second.scss`](./test/second.scss)
 
 ```scss
-body {
-	background-color: gray;
-}
-
-.foo {
-	color: yellow;
-	font-size: 64px;
-	font-family: sans-serif;
+.bar {
+    color: green;
 }
 ```
 
